@@ -19,10 +19,12 @@ class GalleryImageAssert {
     List<GalleryAlbum> resultList = [];
     if (result) {
       for (int i = 0; i < albumList.length; i++) {
-        var coverFile = (await albumList[i].getAssetListPaged(0, 1))[0];
-        var cover = await coverFile.thumbData;
-        resultList.add(GalleryAlbum(albumList[i].id, albumList[i].name, cover,
-            albumList[i].assetCount));
+        if (albumList[i].name != "KBZ_Customer") {
+          var coverFile = (await albumList[i].getAssetListPaged(0, 1))[0];
+          var cover = await coverFile.thumbData;
+          resultList.add(GalleryAlbum(albumList[i].id, albumList[i].name, cover,
+              albumList[i].assetCount));
+        }
       }
       return resultList;
     } else {
